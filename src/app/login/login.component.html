@@ -3,14 +3,19 @@
    <div class="col-lg-4"></div>
    <div class="col-lg-4" style="margin-top: 100px;">
     <h2 class="text-center">Login form</h2>
-    <form action=""class="border m-5 p-5 "(ngSubmit)="login()">
+    <form [formGroup]="loginForm"action=""class="border m-5 p-5 "(ngSubmit)="login()">
         <div>
-         <input  [(ngModel)]="acno" name="acno"class="form-control" type="text"[placeholder]=" accPlaceholder">
+         <input formControlName ="acno" name="acno"class="form-control" type="text"[placeholder]=" accPlaceholder">
         </div>
-        
+        <div *ngIf="this.loginForm.get ('acno')?.touched&&this.loginForm.get('acno')?.errors"class="m-3" style="color: red;">
+         Invalid accountnumber
+        </div>
         <div>
-        <input  [(ngModel)]="pswd" name="pswd" class="form-control" type="password"placeholder="password">
+        <input  formControlName="pswd" name="pswd" class="form-control" type="password"placeholder="password">
     </div>
+    <div *ngIf="this.loginForm.get ('pswd')?.touched&&this.loginForm.get('pswd')?.errors"class="m-3" style="color: red;">
+      Invalid password
+     </div>
        <div>
         <input  class="form-control" type="submit" value="Login" name="" id="loginBtn">
        </div>

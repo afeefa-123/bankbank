@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -12,7 +13,13 @@ export class LoginComponent implements OnInit {
   accPlaceholder="Account please"
   acno=""
   pswd=""
-constructor(private router:Router,private dataservice:DataService) { }
+  loginForm=this.formBuilder.group({
+    
+    acno:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]]
+  
+  })
+constructor(private formBuilder:FormBuilder,private router:Router,private dataservice:DataService) { }
 
   ngOnInit(): void {
 
@@ -28,12 +35,18 @@ constructor(private router:Router,private dataservice:DataService) { }
 
     
     login(){
-     var acno=this.acno
-     var pswd=this.pswd
-     const result=this.dataservice.login(acno,pswd)
+      var acno=this.loginForm.value.acno
+      var pswd=this.loginForm.value.pswd
+     if(this.loginForm.valid)
+     {
+      const result=this.dataservice.login(acno,pswd)
      if(result){
       alert("log in successfull")
       this.router.navigateByUrl('dashboard')
+     }
+     }
+     else{
+      alert('invalid form')
      }
      
     }
