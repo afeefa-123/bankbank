@@ -3,21 +3,21 @@
    <div class="col-lg-4"></div>
    <div class="col-lg-4" style="margin-top: 100px;">
     <h2 class="text-center">Login form</h2>
-    <form action=""class="border m-5 p-5 ">
+    <form action=""class="border m-5 p-5 "(ngSubmit)="login()">
         <div>
-         <input (change)="acnoChange($event)" class="form-control" type="text"[placeholder]=" accPlaceholder">
+         <input  [(ngModel)]="acno" name="acno"class="form-control" type="text"[placeholder]=" accPlaceholder">
         </div>
         
         <div>
-        <input (change)="pswdChange($event)" class="form-control" type="password"placeholder="password">
+        <input  [(ngModel)]="pswd" name="pswd" class="form-control" type="password"placeholder="password">
     </div>
        <div>
-        <input (click)="login()" class="form-control" type="button" value="Login" name="" id="loginBtn">
+        <input  class="form-control" type="submit" value="Login" name="" id="loginBtn">
        </div>
    
   
    <div>
-    <label for="">not a user?click here<a href="">register</a></label>
+    <label for="">not a user?click here<a href="register">register</a></label>
    </div>
 </form>
 </div>
